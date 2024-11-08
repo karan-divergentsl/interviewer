@@ -44,6 +44,15 @@ module.exports = {
           to: { "background-position": "200% center" },
         },
       },
+      colors: {
+        'pink-start': '#ff2db9',
+        'pink-end': '#ff7d88',
+        'yellow-start': '#f9c781',
+        'yellow-end': '#fde291',
+        'blue-start': '#7450ff',
+        'blue-end': '#9076ff',
+
+      },
     },
   },
   plugins: [require("@tailwindcss/forms")],
