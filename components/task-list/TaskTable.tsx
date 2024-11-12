@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 const TaskTable: React.FC = () => {
 
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [totalElements, setTotalElements] = useState(0);
 
     const router = useRouter();
 
@@ -64,7 +65,7 @@ const TaskTable: React.FC = () => {
         options: {
           customHeadRender,
           customBodyRender: (value, tableMeta) => (
-            <p style={{ textAlign: "center", margin: 'auto' }}>
+            <p style={{ textAlign: "left", margin: 'auto' }}>
               <button
                   className="btn-sm bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] py-[5px] text-white shadow-[inset_0px_1px_0px_0px_theme(colors.white/.16)] hover:bg-[length:100%_150%]"
                   onClick={() => handleStart(tableMeta.rowData[0])}
@@ -78,24 +79,23 @@ const TaskTable: React.FC = () => {
     ];
   
     const options = {
-      page,
-      rowsPerPage,
-      count: data.length,
+      page: page,
+      rowsPerPage: rowsPerPage,
+      pagination: true,
+      count: totalElements,
+      tableBodyMaxHeight: "50vh",
       selectableRows: "none",
-      onChangePage: (newPage) => setPage(newPage),
-      onChangeRowsPerPage: (newRowsPerPage) => setRowsPerPage(newRowsPerPage),
       search: false,
       filter: false,
       download: false,
       print: false,
       viewColumns: false,
-      responsive: "standard",
-      setBodyProps: () => ({
-        style: {
-          maxHeight: "50vh",
-          overflowY: "auto",
-        },
-      }),
+      responsive: "simple",
+      onChangePage: (e) => setPage(e),
+      onChangeRowsPerPage: (e) => {
+        setRowsPerPage(parseInt(e));
+        setPage(0);
+      },
     };
 
   return (
@@ -105,7 +105,7 @@ const TaskTable: React.FC = () => {
         options={options}
         data={data}
         columns={columns}
-        className={`tasktable sm:overflow-auto`}
+        className={`sm:overflow-auto tasktable sm:overflow-auto`}
         // className={`sm:overflow-auto w-full ${loaderDetails ? "opacity-50" : ""}`}
       />
     </>

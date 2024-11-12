@@ -6,15 +6,10 @@ import { useParams  } from 'next/navigation';
 import { CircularProgress } from "@mui/material";
 
 
-type UserType = {
-  id: any;
-};
-
-
 function Interview() {
   const params = useParams();
   const id  = params?.id; 
-  const [data, setData] = useState<UserType | null>(null);
+  const [data, setData] = useState<Array[]>([]);
   const [loading, setLoading] = useState(true);
   const [question, setQuestion] = useState("");
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -62,7 +57,7 @@ function Interview() {
     }
   };
 
-  const submitAudio = async (audioBlob: Blob) => {
+  const submitAnswer = async (audioBlob: Blob) => {
     if (!audioBlob) return;
     const formData = new FormData();
     formData.append("audioFile", audioBlob, "recording.wav");
@@ -97,7 +92,7 @@ function Interview() {
                 <h2 className="text-2xl font-medium text-indigo-200 px-5 py-2.5 bg-[#0F1725] rounded-lg max-w-[700px] mx-auto mb-5">
                   Question. {question}
                 </h2>
-                <VoiceAnswerRecorder submitAudio={submitAudio} handleNextQuestion={handleNextQuestion} />
+                <VoiceAnswerRecorder submitAnswer={submitAnswer} handleNextQuestion={handleNextQuestion} />
               </div>
             </div>
           </div>

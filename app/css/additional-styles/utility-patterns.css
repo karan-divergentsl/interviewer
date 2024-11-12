@@ -136,6 +136,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .tasktable {
   border-collapse: collapse;
   background-color: #F5F5F5 !important;
+  border-radius: 10px !important;
 }
 
 .tasktable td,
@@ -154,10 +155,11 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .tasktable th {
-  padding: 15px;
-  text-align: center;
-  background-color: #36304A;
+  padding: 15px 20px;
+  text-align: left;
+  background-color: #6366F1;
   color: white;
+  min-width: 100px;
 }
 
 
