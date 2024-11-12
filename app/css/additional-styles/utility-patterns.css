@@ -123,3 +123,41 @@ input[type="search"]::-webkit-search-results-decoration {
     transform-origin: 50% 50%;
   }
 }
+
+#table-title
+{
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+.tasktable tfoot {
+  background-color: #F4F6FF !important;
+  
+}
+.tasktable {
+  border-collapse: collapse;
+  background-color: #F5F5F5 !important;
+}
+
+.tasktable td,
+.tasktable th {
+  /* border: 1px solid #ddd; */
+  padding: 10px 20px;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;  
+  color: #000;
+}
+
+.tasktable tr:hover td {
+  background-color: #F5F5F5;
+  color: black;
+}
+
+.tasktable th {
+  padding: 15px;
+  text-align: center;
+  background-color: #36304A;
+  color: white;
+}
+
+
