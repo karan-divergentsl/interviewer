@@ -10,12 +10,10 @@ import {
 
 interface VoiceAnswerRecorderProps {
   submitAnswer: (audioData: any) => void;
-  handleNextQuestion: () => void;
 }
 
 export default function VoiceAnswerRecorder({
   submitAnswer,
-  handleNextQuestion,
 }: VoiceAnswerRecorderProps) {
   const [isRecording, setIsRecording] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -56,6 +54,8 @@ export default function VoiceAnswerRecorder({
 
     startCountdown();
   };
+  
+  console.log("#",audioBlob,audioUrl)
 
   const startCountdown = () => {
     if (timerId.current) clearInterval(timerId.current);
@@ -75,20 +75,11 @@ export default function VoiceAnswerRecorder({
     setCurrentState("Record again");
     if (timerId.current) clearInterval(timerId.current);
     if (
-      mediaRecorder?.current?.state === "recording" ||
-      mediaRecorder?.current?.state === "paused"
+      mediaRecorder.current &&
+      (mediaRecorder.current.state === "recording" || mediaRecorder.current.state === "paused")
     ) {
       mediaRecorder.current.stop();
     }
-
-    mediaRecorder.current.onstop = () => {
-      const audioBlobData = new Blob(audioChunks.current, {
-        type: "audio/wav",
-      });
-      setAudioBlob(audioBlobData);
-      setAudioUrl(URL.createObjectURL(audioBlobData));
-      console.log("1");
-    };
 
     setIsRecording(false);
     setIsPaused(false);
@@ -187,14 +178,6 @@ export default function VoiceAnswerRecorder({
           className="btn bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-[inset_0px_1px_0px_0px_theme(colors.white/.16)] hover:bg-[length:100%_150%]"
         >
           Submit
-        </button>
-        <button
-          onClick={() => {
-            handleNextQuestion();
-          }}
-          className="ms-5 btn bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-[inset_0px_1px_0px_0px_theme(colors.white/.16)] hover:bg-[length:100%_150%]"
-        >
-          Next
         </button>
       </div>
     </div>
